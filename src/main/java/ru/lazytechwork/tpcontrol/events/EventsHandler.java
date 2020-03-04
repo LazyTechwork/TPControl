@@ -4,6 +4,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import ru.lazytechwork.tpcontrol.TPControl;
 import ru.lazytechwork.tpcontrol.data.TeleportationData;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class EventsHandler {
             return;
         String pars[] = event.getParameters();
         TeleportationData tpdata = TeleportationData.get(sender.getEntityWorld());
-        HashMap<String, Integer> data = (HashMap<String, Integer>) tpdata.getTeleportCounts().clone();
+        HashMap<String, Integer> data = tpdata.getTeleportCounts();
         if (pars.length == 1) {
 //            if (Objects.equals(pars[0], sender.getName()))
 //                return;

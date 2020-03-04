@@ -15,7 +15,7 @@ import java.util.Map;
 public class TeleportationData extends WorldSavedData {
 
     private static final String DATA_NAME = TPControl.MODID + "_tpdata";
-    private HashMap<String, Integer> teleportCounts;
+    private HashMap<String, Integer> teleportCounts = new HashMap<String, Integer>();
 
     public TeleportationData(String name) {
         super(name);
@@ -23,7 +23,6 @@ public class TeleportationData extends WorldSavedData {
 
     public TeleportationData() {
         super(DATA_NAME);
-        this.teleportCounts = new HashMap<String, Integer>();
         markDirty();
     }
 
@@ -40,7 +39,6 @@ public class TeleportationData extends WorldSavedData {
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-        TPControl.LOGGER.info("readFromNBT");
         if (nbt.hasKey("teleportations")) {
             this.teleportCounts.clear();
             NBTTagList tagList = nbt.getTagList("teleportations", Constants.NBT.TAG_COMPOUND);
@@ -53,7 +51,6 @@ public class TeleportationData extends WorldSavedData {
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        TPControl.LOGGER.info("writeToNBT");
         NBTTagList tagList = new NBTTagList();
         ArrayList<String> resultString = new ArrayList<String>();
         for (Map.Entry<String, Integer> entry : this.teleportCounts.entrySet()) {
