@@ -17,15 +17,16 @@ public class TeleportationData extends WorldSavedData {
 
     public TeleportationData() {
         super(DATA_NAME);
+        markDirty();
     }
 
     public static TeleportationData get(World world) {
         MapStorage storage = world.getMapStorage();
+        assert storage != null;
         TeleportationData data = (TeleportationData) storage.getOrLoadData(TeleportationData.class, DATA_NAME);
         if (data == null) {
             data = new TeleportationData();
             data.teleportCounts = new HashMap<String, Integer>();
-            data.markDirty();
             storage.setData(DATA_NAME, data);
         }
         return data;
@@ -33,21 +34,22 @@ public class TeleportationData extends WorldSavedData {
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
+        TPControl.LOGGER.info("readFromNBT");
         if (nbt.hasKey(DATA_NAME)) {
             String[] data = nbt.getString(DATA_NAME).split(";");
             for (int i = 0; i < data.length; i++) {
                 String[] info = data[i].split(":");
+                TPControl.LOGGER.info(info[0] + " - " + Integer.parseInt(info[1]));
                 teleportCounts.put(info[0], Integer.parseInt(info[1]));
             }
+            markDirty();
         }
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        ArrayList<String> resultString = new ArrayList<String>();
-        for (Map.Entry<String, Integer> entry : teleportCounts.entrySet())
-            resultString.add(entry.getKey() + ":" + entry.getValue());
-        compound.setString(DATA_NAME, String.join(";", resultString));
+        TPControl.LOGGER.info("writeToNBT");
+        compound.setString(DATA_NAME, toString());
         return compound;
     }
 
@@ -57,7 +59,7 @@ public class TeleportationData extends WorldSavedData {
 
     public void setTeleportCounts(HashMap<String, Integer> teleportCounts) {
         this.teleportCounts = teleportCounts;
-        this.markDirty();
+        markDirty();
     }
 
     @Override
