@@ -14,7 +14,10 @@
   "parent": "tpcontrol:tpcontrol/root",
   "criteria": {
     "teleportation": {
-      "trigger": "minecraft:impossible"
+      "trigger": "tpcontrol:teleported",
+      "conditions": {
+        "teleportations": 5
+      }
     }
   }
 }
