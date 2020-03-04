@@ -1,3 +1,13 @@
 # Advancements
 advancements.tpcontrol.root.title=TPControl
 advancements.tpcontrol.root.description=Advancements from TPControl mod
+advancements.tpcontrol.popular1.title=Popular I
+advancements.tpcontrol.popular1.description=Get 5 teleportations
+advancements.tpcontrol.popular2.title=Popular II
+advancements.tpcontrol.popular2.description=Get 50 teleportations
+advancements.tpcontrol.popular3.title=Popular III
+advancements.tpcontrol.popular3.description=Get 100 teleportations
+advancements.tpcontrol.popular4.title=Popular IV
+advancements.tpcontrol.popular4.description=Get 500 teleportations
+advancements.tpcontrol.popular5.title=Popular V
+advancements.tpcontrol.popular5.description=Get 1000 teleportations
