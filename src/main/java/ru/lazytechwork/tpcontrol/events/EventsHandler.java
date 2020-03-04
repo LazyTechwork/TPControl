@@ -18,7 +18,7 @@ public class EventsHandler {
             return;
         String pars[] = event.getParameters();
         TeleportationData tpdata = TeleportationData.get(sender.getEntityWorld());
-        HashMap<String, Integer> data = tpdata.getTeleportCounts();
+        HashMap<String, Integer> data = (HashMap<String, Integer>) tpdata.getTeleportCounts().clone();
         if (pars.length == 1) {
 //            if (Objects.equals(pars[0], sender.getName()))
 //                return;
