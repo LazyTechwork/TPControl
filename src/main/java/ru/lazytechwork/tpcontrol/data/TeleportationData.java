@@ -59,4 +59,12 @@ public class TeleportationData extends WorldSavedData {
         this.teleportCounts = teleportCounts;
         this.markDirty();
     }
+
+    @Override
+    public String toString() {
+        ArrayList<String> resultString = new ArrayList<String>();
+        for (Map.Entry<String, Integer> entry : teleportCounts.entrySet())
+            resultString.add(entry.getKey() + ":" + entry.getValue());
+        return String.join(";", resultString);
+    }
 }
