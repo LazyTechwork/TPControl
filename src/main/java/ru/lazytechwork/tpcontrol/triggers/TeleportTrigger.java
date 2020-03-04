@@ -57,16 +57,20 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
 
     @Override
     public TeleportTrigger.Instance deserializeInstance(JsonObject json, JsonDeserializationContext context) {
-        return new Instance();
+        int teleportations = json.get("teleportations").getAsInt();
+        return new Instance(teleportations);
     }
 
     public static class Instance extends AbstractCriterionInstance {
-        public Instance() {
+        private int teleportations;
+
+        public Instance(int teleportations) {
             super(TeleportTrigger.ID);
+            this.teleportations = teleportations;
         }
 
         public boolean test(int count) {
-            return count > 0;
+            return count >= teleportations;
         }
     }
 
