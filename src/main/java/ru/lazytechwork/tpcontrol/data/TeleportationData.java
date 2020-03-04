@@ -25,6 +25,7 @@ public class TeleportationData extends WorldSavedData {
         if (data == null) {
             data = new TeleportationData();
             data.teleportCounts = new HashMap<String, Integer>();
+            data.markDirty();
             storage.setData(DATA_NAME, data);
         }
         return data;
@@ -56,5 +57,6 @@ public class TeleportationData extends WorldSavedData {
 
     public void setTeleportCounts(HashMap<String, Integer> teleportCounts) {
         this.teleportCounts = teleportCounts;
+        this.markDirty();
     }
 }
