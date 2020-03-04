@@ -5,7 +5,10 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ru.lazytechwork.tpcontrol.TPControl;
+import ru.lazytechwork.tpcontrol.data.TeleportCount;
+import ru.lazytechwork.tpcontrol.data.TeleportationData;
 
+import java.util.List;
 import java.util.Objects;
 
 public class EventsHandler {
@@ -15,6 +18,7 @@ public class EventsHandler {
         ICommandSender sender = event.getSender();
         String command = event.getCommand().getName();
         String pars[] = event.getParameters();
+        List<TeleportCount> data = TeleportationData.get(sender.getEntityWorld()).getTeleportCounts();
         if (pars.length == 1) {
             TPControl.LOGGER.info(sender.getName());
             TPControl.LOGGER.info(sender.getDisplayName());

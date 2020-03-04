@@ -7,12 +7,13 @@ import net.minecraft.world.storage.WorldSavedData;
 import ru.lazytechwork.tpcontrol.TPControl;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TeleportationData extends WorldSavedData {
 
     private static final String DATA_NAME = TPControl.MODID + "_tpdata";
-    private List<TeleportCount> teleportCounts;
+    private HashMap<String, Integer> teleportCounts;
 
     public TeleportationData() {
         super(DATA_NAME);
@@ -23,7 +24,7 @@ public class TeleportationData extends WorldSavedData {
         TeleportationData data = (TeleportationData) storage.getOrLoadData(TeleportationData.class, DATA_NAME);
         if (data == null) {
             data = new TeleportationData();
-            data.teleportCounts = new ArrayList<TeleportCount>();
+            data.teleportCounts = new HashMap<String, Integer>();
             storage.setData(DATA_NAME, data);
         }
         return data;
@@ -35,7 +36,7 @@ public class TeleportationData extends WorldSavedData {
             String[] data = nbt.getString(DATA_NAME).split(";");
             for (int i = 0; i < data.length; i++) {
                 String[] info = data[i].split(":");
-                teleportCounts.add(new TeleportCount(info[0], Integer.parseInt(info[1])));
+                teleportCounts.put(info[0], Integer.parseInt(info[1]));
             }
         }
     }
@@ -43,9 +44,17 @@ public class TeleportationData extends WorldSavedData {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         ArrayList<String> resultString = new ArrayList<String>();
-        for (int i = 0; i < teleportCounts.size(); i++)
-            resultString.add(teleportCounts.get(i).toString());
+        for (Map.Entry<String, Integer> entry : teleportCounts.entrySet())
+            resultString.add(entry.getKey() + ":" + entry.getValue());
         compound.setString(DATA_NAME, String.join(";", resultString));
         return compound;
+    }
+
+    public HashMap<String, Integer> getTeleportCounts() {
+        return teleportCounts;
+    }
+
+    public void setTeleportCounts(HashMap<String, Integer> teleportCounts) {
+        this.teleportCounts = teleportCounts;
     }
 }
