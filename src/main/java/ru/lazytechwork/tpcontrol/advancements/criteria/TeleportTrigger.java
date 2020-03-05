@@ -1,24 +1,21 @@
 package ru.lazytechwork.tpcontrol.advancements.criteria;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.sun.istack.internal.NotNull;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.advancements.critereon.AbstractCriterionInstance;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import ru.lazytechwork.tpcontrol.TPControl;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instance> {
-    private static final ResourceLocation ID = new ResourceLocation(TPControl.MODID, "teleported");
-    private final Map<PlayerAdvancements, TeleportTrigger.Listeners> listeners = Maps.<PlayerAdvancements, TeleportTrigger.Listeners>newHashMap();
+    private static final ResourceLocation ID = new ResourceLocation(TPControl.MODID, "win_minigame");
+    private final Map<PlayerAdvancements, Listeners> listeners = new HashMap<>();
 
     @Override
     public ResourceLocation getId() {
@@ -26,90 +23,93 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
     }
 
     @Override
-    public void addListener(PlayerAdvancements playerAdvancementsIn, ICriterionTrigger.Listener<TeleportTrigger.Instance> listener) {
-        TeleportTrigger.Listeners consumeitemtrigger$listeners = this.listeners.get(playerAdvancementsIn);
+    public void addListener(PlayerAdvancements playerAdvancementsIn, Listener<Instance> listener) {
+        Listeners listeners = this.listeners.get(playerAdvancementsIn);
 
-        if (consumeitemtrigger$listeners == null) {
-            consumeitemtrigger$listeners = new Listeners(playerAdvancementsIn);
-            this.listeners.put(playerAdvancementsIn, consumeitemtrigger$listeners);
+        if (listeners == null) {
+            listeners = new Listeners(playerAdvancementsIn);
+            this.listeners.put(playerAdvancementsIn, listeners);
         }
 
-        consumeitemtrigger$listeners.add(listener);
+        listeners.add(listener);
     }
 
-    @Override
-    public void removeListener(PlayerAdvancements playerAdvancementsIn, ICriterionTrigger.Listener<TeleportTrigger.Instance> listener) {
-        TeleportTrigger.Listeners consumeitemtrigger$listeners = this.listeners.get(playerAdvancementsIn);
+    public void removeListener(PlayerAdvancements playerAdvancementsIn, Listener<Instance> listener) {
+        Listeners listeners = this.listeners.get(playerAdvancementsIn);
 
-        if (consumeitemtrigger$listeners != null) {
-            consumeitemtrigger$listeners.remove(listener);
+        if (listeners != null) {
+            listeners.remove(listener);
 
-            if (consumeitemtrigger$listeners.isEmpty()) {
+            if (listeners.isEmpty()) {
                 this.listeners.remove(playerAdvancementsIn);
             }
         }
     }
 
-    @Override
     public void removeAllListeners(PlayerAdvancements playerAdvancementsIn) {
         this.listeners.remove(playerAdvancementsIn);
     }
 
-    @Override
-    public TeleportTrigger.Instance deserializeInstance(JsonObject json, JsonDeserializationContext context) {
-        int teleportations = json.get("teleportations").getAsInt();
+    /**
+     * Deserialize a ICriterionInstance of this trigger from the data in the JSON.
+     */
+    public Instance deserializeInstance(JsonObject json, JsonDeserializationContext context) {
+        int teleportations = 0;
+        if (json.has("teleportations")) {
+            teleportations = JsonUtils.getInt(json, "teleportations");
+        }
+
         return new Instance(teleportations);
     }
 
-    public static class Instance extends AbstractCriterionInstance {
-        private int teleportations;
+    public void trigger(EntityPlayerMP player, int teleportations) {
+        Listeners listeners = this.listeners.get(player.getAdvancements());
 
-        public Instance(int teleportations) {
-            super(TeleportTrigger.ID);
-            this.teleportations = teleportations;
-        }
-
-        public boolean test(int count) {
-            return count >= teleportations;
+        if (listeners != null) {
+            listeners.trigger(teleportations);
         }
     }
 
-    public void trigger(EntityPlayerMP player, int count) {
-        TeleportTrigger.Listeners enterblocktrigger$listeners = this.listeners.get(player.getAdvancements());
-        TPControl.LOGGER.info("TeleportTrigger triggered! TP Count: " + count);
-        TPControl.LOGGER.info(enterblocktrigger$listeners);
-        if (enterblocktrigger$listeners != null) {
-            enterblocktrigger$listeners.trigger(count);
+    static class Instance extends AbstractCriterionInstance {
+        private final int TELEPORTATIONS;
+
+        Instance(@NotNull int teleportations) {
+            super(ID);
+            this.TELEPORTATIONS = teleportations;
+        }
+
+        boolean test(int teleportations) {
+            return teleportations >= this.TELEPORTATIONS;
         }
     }
 
     static class Listeners {
         private final PlayerAdvancements playerAdvancements;
-        private final Set<ICriterionTrigger.Listener<TeleportTrigger.Instance>> listeners = Sets.<ICriterionTrigger.Listener<TeleportTrigger.Instance>>newHashSet();
+        private final Set<Listener<Instance>> listeners = new HashSet<>();
 
-        public Listeners(PlayerAdvancements playerAdvancementsIn) {
+        Listeners(PlayerAdvancements playerAdvancementsIn) {
             this.playerAdvancements = playerAdvancementsIn;
         }
 
-        public boolean isEmpty() {
+        boolean isEmpty() {
             return this.listeners.isEmpty();
         }
 
-        public void add(ICriterionTrigger.Listener<TeleportTrigger.Instance> listener) {
+        public void add(Listener<Instance> listener) {
             this.listeners.add(listener);
         }
 
-        public void remove(ICriterionTrigger.Listener<TeleportTrigger.Instance> listener) {
+        void remove(Listener<Instance> listener) {
             this.listeners.remove(listener);
         }
 
-        public void trigger(int tpCount) {
-            List<ICriterionTrigger.Listener<TeleportTrigger.Instance>> list = null;
-            TPControl.LOGGER.info("TeleportTrigger triggered! TP Count: " + tpCount);
-            for (ICriterionTrigger.Listener<TeleportTrigger.Instance> listener : this.listeners) {
-                if (((TeleportTrigger.Instance) listener.getCriterionInstance()).test(tpCount)) {
+        void trigger(int teleportations) {
+            List<Listener<Instance>> list = null;
+
+            for (Listener<Instance> listener : this.listeners) {
+                if (listener.getCriterionInstance().test(teleportations)) {
                     if (list == null) {
-                        list = Lists.<ICriterionTrigger.Listener<TeleportTrigger.Instance>>newArrayList();
+                        list = new ArrayList<>();
                     }
 
                     list.add(listener);
@@ -117,8 +117,7 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
             }
 
             if (list != null) {
-                for (ICriterionTrigger.Listener<TeleportTrigger.Instance> listener1 : list) {
-                    TPControl.LOGGER.info("Granting crieterion: " + tpCount + ". Advancement info: " + this.playerAdvancements.toString());
+                for (Listener<Instance> listener1 : list) {
                     listener1.grantCriterion(this.playerAdvancements);
                 }
             }
