@@ -2,7 +2,6 @@ package ru.lazytechwork.tpcontrol.advancements.criteria;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import com.sun.istack.internal.NotNull;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.advancements.critereon.AbstractCriterionInstance;
@@ -73,7 +72,7 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
     static class Instance extends AbstractCriterionInstance {
         private final int TELEPORTATIONS;
 
-        Instance(@NotNull int teleportations) {
+        Instance(int teleportations) {
             super(ID);
             this.TELEPORTATIONS = teleportations;
         }
