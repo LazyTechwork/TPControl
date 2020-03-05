@@ -1,8 +1,8 @@
 # Advancements
 advancements.tpcontrol.root.title=TPControl
 advancements.tpcontrol.root.description=Достижения из мода TPControl
-advancements.tpcontrol.popular1.title=Популярный I
-advancements.tpcontrol.popular1.description=Набрать на свой счёт 5 телепортаций
+advancements.tpcontrol.popular_one.title=Популярный I
+advancements.tpcontrol.popular_one.description=Набрать на свой счёт 5 телепортаций
 advancements.tpcontrol.popular2.title=Популярный II
 advancements.tpcontrol.popular2.description=Набрать на свой счёт 50 телепортаций
 advancements.tpcontrol.popular3.title=Популярный III

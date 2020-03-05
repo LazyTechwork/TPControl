@@ -1,0 +1,23 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:ender_pearl"
+        },
+        "title": {
+            "translate": "advancements.tpcontrol.popular_one.title"
+        },
+        "description": {
+            "translate": "advancements.tpcontrol.popular_one.description"
+        },
+        "frame": "goal"
+    },
+    "parent": "tpcontrol:tpcontrol/root",
+    "criteria": {
+        "entered_nether": {
+            "trigger": "minecraft:teleported",
+            "conditions": {
+                "teleportations": 5
+            }
+        }
+    }
+}

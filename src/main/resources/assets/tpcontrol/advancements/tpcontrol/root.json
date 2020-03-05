@@ -1,21 +1,24 @@
 {
-  "display": {
-    "icon": {
-      "item": "minecraft:ender_pearl"
+    "display": {
+        "icon": {
+            "item": "minecraft:ender_pearl"
+        },
+        "title": {
+            "translate": "advancements.tpcontrol.root.title"
+        },
+        "description": {
+            "translate": "advancements.tpcontrol.root.description"
+        },
+        "background": "minecraft:textures/gui/advancements/backgrounds/end.png",
+        "show_toast": true,
+        "announce_to_chat": true
     },
-    "title": {
-      "translate": "advancements.tpcontrol.root.title"
-    },
-    "description": {
-      "translate": "advancements.tpcontrol.root.description"
-    },
-    "background": "minecraft:textures/gui/advancements/backgrounds/end.png",
-    "show_toast": false,
-    "announce_to_chat": false
-  },
-  "criteria": {
-    "impossible": {
-      "trigger": "minecraft:impossible"
+    "criteria": {
+        "teleportation": {
+            "trigger": "tpcontrol:teleported",
+            "conditions": {
+                "teleportations": 1
+            }
+        }
     }
-  }
 }

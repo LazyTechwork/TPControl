@@ -1,4 +1,4 @@
-package ru.lazytechwork.tpcontrol.triggers;
+package ru.lazytechwork.tpcontrol.advancements.criteria;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -76,7 +76,8 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
 
     public void trigger(EntityPlayerMP player, int count) {
         TeleportTrigger.Listeners enterblocktrigger$listeners = this.listeners.get(player.getAdvancements());
-
+        TPControl.LOGGER.info("TeleportTrigger triggered! TP Count: " + count);
+        TPControl.LOGGER.info(enterblocktrigger$listeners);
         if (enterblocktrigger$listeners != null) {
             enterblocktrigger$listeners.trigger(count);
         }
@@ -102,11 +103,11 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
             this.listeners.remove(listener);
         }
 
-        public void trigger(int oreCount) {
+        public void trigger(int tpCount) {
             List<ICriterionTrigger.Listener<TeleportTrigger.Instance>> list = null;
-
+            TPControl.LOGGER.info("TeleportTrigger triggered! TP Count: " + tpCount);
             for (ICriterionTrigger.Listener<TeleportTrigger.Instance> listener : this.listeners) {
-                if (((TeleportTrigger.Instance) listener.getCriterionInstance()).test(oreCount)) {
+                if (((TeleportTrigger.Instance) listener.getCriterionInstance()).test(tpCount)) {
                     if (list == null) {
                         list = Lists.<ICriterionTrigger.Listener<TeleportTrigger.Instance>>newArrayList();
                     }
@@ -117,6 +118,7 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
 
             if (list != null) {
                 for (ICriterionTrigger.Listener<TeleportTrigger.Instance> listener1 : list) {
+                    TPControl.LOGGER.info("Granting crieterion: " + tpCount + ". Advancement info: " + this.playerAdvancements.toString());
                     listener1.grantCriterion(this.playerAdvancements);
                 }
             }
