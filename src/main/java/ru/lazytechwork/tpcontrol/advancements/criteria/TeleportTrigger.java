@@ -13,7 +13,7 @@ import ru.lazytechwork.tpcontrol.TPControl;
 import java.util.*;
 
 public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instance> {
-    private static final ResourceLocation ID = new ResourceLocation(TPControl.MODID, "win_minigame");
+    private static final ResourceLocation ID = new ResourceLocation(TPControl.MODID, "teleported");
     private final Map<PlayerAdvancements, Listeners> listeners = new HashMap<>();
 
     @Override
