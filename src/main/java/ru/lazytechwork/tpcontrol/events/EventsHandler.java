@@ -38,7 +38,6 @@ public class EventsHandler {
             return;
         data.put(key, tpcount);
         tpdata.setTeleportCounts(data);
-        sender.sendMessage(new TextComponentString("Triggering #0, see more in console (Teleportations " + tpcount + ")"));
         AdvancementManager.TELEPORT_TRIGGER.trigger((EntityPlayerMP) event.getSender().getCommandSenderEntity(), tpcount);
         sender.sendMessage(new TextComponentString(tpdata.toString()));
     }

@@ -25,10 +25,6 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
     public void addListener(PlayerAdvancements playerAdvancementsIn, Listener<Instance> listener) {
         Listeners listeners = this.listeners.get(playerAdvancementsIn);
 
-        TPControl.LOGGER.warn("Adding new listener");
-        TPControl.LOGGER.warn(playerAdvancementsIn);
-        TPControl.LOGGER.warn(this.toString());
-
         if (listeners == null) {
             listeners = new Listeners(playerAdvancementsIn);
             this.listeners.put(playerAdvancementsIn, listeners);
@@ -67,14 +63,8 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
 
     public void trigger(EntityPlayerMP player, int teleportations) {
         Listeners listeners = this.listeners.get(player.getAdvancements());
-        TPControl.LOGGER.warn("Triggering #1");
-        TPControl.LOGGER.warn(player.toString());
-        TPControl.LOGGER.warn(this.listeners.get(player.getAdvancements()));
-        TPControl.LOGGER.warn(this.listeners);
-        TPControl.LOGGER.warn(this.toString());
 
         if (listeners != null) {
-            TPControl.LOGGER.warn("Triggering #2");
             listeners.trigger(teleportations);
         }
     }
@@ -88,8 +78,6 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
         }
 
         boolean test(int teleportations) {
-            TPControl.LOGGER.warn(teleportations);
-            TPControl.LOGGER.warn(this.TELEPORTATIONS);
             return teleportations >= this.TELEPORTATIONS;
         }
     }
@@ -124,13 +112,11 @@ public class TeleportTrigger implements ICriterionTrigger<TeleportTrigger.Instan
                     }
 
                     list.add(listener);
-                    TPControl.LOGGER.warn("Triggering #3");
                 }
             }
 
             if (list != null) {
                 for (Listener<Instance> listener1 : list) {
-                    TPControl.LOGGER.warn("Triggering #4");
                     listener1.grantCriterion(this.playerAdvancements);
                 }
             }
