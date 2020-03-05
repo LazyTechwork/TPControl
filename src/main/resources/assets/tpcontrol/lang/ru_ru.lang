@@ -11,3 +11,6 @@ advancements.tpcontrol.popular_four.title=Популярный IV
 advancements.tpcontrol.popular_four.description=К Вам телепортировались 1 000 раз
 advancements.tpcontrol.popular_five.title=Популярный V
 advancements.tpcontrol.popular_five.description=К Вам телепортировались 10 000 раз
+
+# Messages
+messages.tpcontrol.tpstats=Привет, %s! К Вам телепортировались %d раз!

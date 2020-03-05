@@ -1,9 +1,12 @@
 package ru.lazytechwork.tpcontrol.events;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.event.CommandEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ru.lazytechwork.tpcontrol.advancements.AdvancementManager;
 import ru.lazytechwork.tpcontrol.data.TeleportationData;
@@ -24,13 +27,13 @@ public class EventsHandler {
         String key = null;
         int tpcount = -1;
         if (pars.length == 1) {
-//            if (Objects.equals(pars[0], sender.getName()))
-//                return;
+            if (Objects.equals(pars[0], sender.getName()))
+                return;
             key = pars[0];
             tpcount = data.getOrDefault(pars[0], 0) + 1;
-        } else if (pars.length == 2) {
-//            if (Objects.equals(pars[0], pars[1]))
-//                return;
+        } else if (pars.length >= 2) {
+            if (Objects.equals(pars[0], pars[1]))
+                return;
             key = pars[1];
             tpcount = data.getOrDefault(pars[1], 0) + 1;
         }
@@ -39,6 +42,14 @@ public class EventsHandler {
         data.put(key, tpcount);
         tpdata.setTeleportCounts(data);
         AdvancementManager.TELEPORT_TRIGGER.trigger((EntityPlayerMP) event.getSender().getCommandSenderEntity(), tpcount);
-        sender.sendMessage(new TextComponentString(tpdata.toString()));
+    }
+
+    @SubscribeEvent
+    public void onWorldJoin(EntityJoinWorldEvent event) {
+        if (!(event.getEntity() instanceof EntityPlayerMP))
+            return;
+        EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
+        int tpcounts = TeleportationData.get(player.getEntityWorld()).getTeleportCounts().get(player.getName());
+        player.sendMessage(new TextComponentString(I18n.format("messages.tpcontrol.tpstats", (ChatFormatting.BOLD.toString() + ChatFormatting.GOLD.toString() + player.getName() + ChatFormatting.RESET.toString()), (ChatFormatting.BOLD.toString() + ChatFormatting.RED.toString() + tpcounts + ChatFormatting.RESET.toString()))));
     }
 }
