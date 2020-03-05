@@ -11,7 +11,7 @@
         },
         "frame": "goal"
     },
-    "parent": "tpcontrol:tpcontrol/root",
+    "parent": "tpcontrol:root",
     "criteria": {
         "entered_nether": {
             "trigger": "minecraft:teleported",
