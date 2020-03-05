@@ -7,6 +7,6 @@ public class AdvancementManager {
     public static final TeleportTrigger TELEPORT_TRIGGER = new TeleportTrigger();
     
     public static void registerCriteria () {
-        ArtisanRegistry.registerAdvancementTrigger(new TeleportTrigger());
+        ArtisanRegistry.registerAdvancementTrigger(TELEPORT_TRIGGER);
     }
 }

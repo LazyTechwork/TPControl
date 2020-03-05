@@ -1,13 +1,10 @@
 package ru.lazytechwork.tpcontrol.events;
 
-import net.minecraft.advancements.Advancement;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import ru.lazytechwork.tpcontrol.TPControl;
 import ru.lazytechwork.tpcontrol.advancements.AdvancementManager;
 import ru.lazytechwork.tpcontrol.data.TeleportationData;
 
@@ -21,9 +18,6 @@ public class EventsHandler {
         String command = event.getCommand().getName();
         if (!Objects.equals(command, "tp"))
             return;
-        sender.sendMessage(new TextComponentTranslation("tpcontrol:advancements.tpcontrol.popular_one.title"));
-        sender.sendMessage(new TextComponentTranslation("advancements.tpcontrol.popular_one.title"));
-        sender.sendMessage(new TextComponentTranslation("advancements.story.lava_bucket.title"));
         String pars[] = event.getParameters();
         TeleportationData tpdata = TeleportationData.get(sender.getEntityWorld());
         HashMap<String, Integer> data = tpdata.getTeleportCounts();
@@ -44,9 +38,8 @@ public class EventsHandler {
             return;
         data.put(key, tpcount);
         tpdata.setTeleportCounts(data);
-        AdvancementManager.TELEPORT_TRIGGER.trigger((EntityPlayerMP) sender.getCommandSenderEntity(), tpcount);
-        event.getSender().getServer().getAdvancementManager().reload();
-        event.getSender().getServer().getAdvancementManager().getAdvancements().forEach((Advancement advancement) -> TPControl.LOGGER.info(advancement.getId()));
+        sender.sendMessage(new TextComponentString("Triggering #0, see more in console (Teleportations " + tpcount + ")"));
+        AdvancementManager.TELEPORT_TRIGGER.trigger((EntityPlayerMP) event.getSender().getCommandSenderEntity(), tpcount);
         sender.sendMessage(new TextComponentString(tpdata.toString()));
     }
 }
