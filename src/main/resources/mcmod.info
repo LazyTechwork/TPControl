@@ -1,12 +1,11 @@
 [
     {
         "modid": "tpcontrol",
-        "name": "TP Control",
-        "description": "TPControl exclusive mod for Lololoshka",
+        "name": "TPControl",
+        "description": "TPControl is very small mod to control teleportations count to you",
         "version": "${version}",
         "mcversion": "${mcversion}",
-        "url": "",
-        "updateUrl": "",
+        "url": "https://vk.cc/an2xSH",
         "authorList": [
             "LazyTechwork"
         ],
