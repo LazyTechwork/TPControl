@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactManager">
+    <artifact name="CopyResources">
+      <output-path>$PROJECT_DIR$/build/classes/main</output-path>
+      <root id="root">
+        <element id="dir-copy" path="$PROJECT_DIR$/build/resources/main" />
+      </root>
+    </artifact>
+  </component>
   <component name="CompilerConfiguration">
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
@@ -17,9 +25,7 @@
       <module name="tpcontrol.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
-  <component name="CopyrightManager" default="">
-    <module2copyright />
-  </component>
+  <component name="CopyrightManager" default="" />
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
@@ -83,6 +89,8 @@
   </component>
   <component name="ProjectRunConfigurationManager">
     <configuration default="false" name="Minecraft Client" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="GradleStart" />
       <module name="tpcontrol.main" />
       <option name="PROGRAM_PARAMETERS" value="--username=Lololowka" />
@@ -92,6 +100,9 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
         <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="CopyResources" />
+        </option>
       </method>
     </configuration>
     <configuration default="false" name="Minecraft Server" type="Application" factoryName="Application">

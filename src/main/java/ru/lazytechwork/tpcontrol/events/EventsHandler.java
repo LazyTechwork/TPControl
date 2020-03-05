@@ -45,6 +45,7 @@ public class EventsHandler {
         data.put(key, tpcount);
         tpdata.setTeleportCounts(data);
         AdvancementManager.TELEPORT_TRIGGER.trigger((EntityPlayerMP) sender.getCommandSenderEntity(), tpcount);
+        event.getSender().getServer().getAdvancementManager().reload();
         event.getSender().getServer().getAdvancementManager().getAdvancements().forEach((Advancement advancement) -> TPControl.LOGGER.info(advancement.getId()));
         sender.sendMessage(new TextComponentString(tpdata.toString()));
     }
