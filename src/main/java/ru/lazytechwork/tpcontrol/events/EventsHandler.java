@@ -49,7 +49,17 @@ public class EventsHandler {
         if (!(event.getEntity() instanceof EntityPlayerMP))
             return;
         EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
-        int tpcounts = TeleportationData.get(player.getEntityWorld()).getTeleportCounts().get(player.getName());
-        player.sendMessage(new TextComponentString(I18n.format("messages.tpcontrol.tpstats", (ChatFormatting.BOLD.toString() + ChatFormatting.GOLD.toString() + player.getName() + ChatFormatting.RESET.toString()), (ChatFormatting.BOLD.toString() + ChatFormatting.RED.toString() + tpcounts + ChatFormatting.RESET.toString()))));
+        Integer tpcounts = TeleportationData.get(player.getEntityWorld()).getTeleportCounts().get(player.getName());
+        if (tpcounts == null)
+            tpcounts = 0;
+        player.sendMessage(new TextComponentString(I18n.format("messages.tpcontrol.tpstats",
+                (ChatFormatting.BOLD.toString() + ChatFormatting.GOLD.toString() + player.getName() +
+                        ChatFormatting.RESET.toString()), (ChatFormatting.BOLD.toString() +
+                        ChatFormatting.RED.toString() + tpcounts + ChatFormatting.RESET.toString()))));
+
+        if (player.getName().equals("Lololowka"))
+            player.sendMessage(new TextComponentString("Made specially for "
+                    + ChatFormatting.GOLD + "Lololoshka" + ChatFormatting.RESET +
+                    " from Ivan Petrov (" + ChatFormatting.LIGHT_PURPLE + "YT WineGear" + ChatFormatting.RESET + ") ;)"));
     }
 }

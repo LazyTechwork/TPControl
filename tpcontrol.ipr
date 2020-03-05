@@ -94,7 +94,6 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="GradleStart" />
       <module name="tpcontrol.main" />
-      <option name="PROGRAM_PARAMETERS" value="--username=Lololowka" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run" />
       <extension enabled="false" name="coverage" runner="idea" sample_coverage="true" />
       <RunnerSettings RunnerId="Run" />
