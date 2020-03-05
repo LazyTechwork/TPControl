@@ -9,7 +9,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.lazytechwork.tpcontrol.proxy.CommonProxy;
 
-@Mod(modid = TPControl.MODID, version = TPControl.VERSION, name = TPControl.NAME, useMetadata = false, acceptedMinecraftVersions = "[1.12.2]")
+@Mod(modid = TPControl.MODID,
+        version = TPControl.VERSION,
+        name = TPControl.NAME,
+        dependencies = "required-after:forge@[14.23.5.2768,);")
 public class TPControl {
 
     public static final String MODID = "tpcontrol";

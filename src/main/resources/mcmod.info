@@ -1,0 +1,18 @@
+[
+    {
+        "modid": "tpcontrol",
+        "name": "TP Control",
+        "description": "TPControl exclusive mod for Lololoshka",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "",
+        "updateUrl": "",
+        "authorList": [
+            "LazyTechwork"
+        ],
+        "credits": "",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
+]
