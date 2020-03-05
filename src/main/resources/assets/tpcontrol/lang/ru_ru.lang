@@ -1,13 +1,13 @@
 # Advancements
-advancements.tpcontrol.root.title=TPControl
-advancements.tpcontrol.root.description=Достижения из мода TPControl
+advancements.tpcontrol.root.title=Телепортации
+advancements.tpcontrol.root.description=Тееееееееееелепортируйтесь!
 advancements.tpcontrol.popular_one.title=Популярный I
-advancements.tpcontrol.popular_one.description=Набрать на свой счёт 5 телепортаций
-advancements.tpcontrol.popular2.title=Популярный II
-advancements.tpcontrol.popular2.description=Набрать на свой счёт 50 телепортаций
-advancements.tpcontrol.popular3.title=Популярный III
-advancements.tpcontrol.popular3.description=Набрать на свой счёт 100 телепортаций
-advancements.tpcontrol.popular4.title=Популярный IV
-advancements.tpcontrol.popular4.description=Набрать на свой счёт 500 телепортаций
-advancements.tpcontrol.popular5.title=Популярный V
-advancements.tpcontrol.popular5.description=Набрать на свой счёт 1000 телепортаций
+advancements.tpcontrol.popular_one.description=К Вам телепортировались 5 раз
+advancements.tpcontrol.popular_two.title=Популярный II
+advancements.tpcontrol.popular_two.description=К Вам телепортировались 50 раз
+advancements.tpcontrol.popular_three.title=Популярный III
+advancements.tpcontrol.popular_three.description=К Вам телепортировались 500 раз
+advancements.tpcontrol.popular_four.title=Популярный IV
+advancements.tpcontrol.popular_four.description=К Вам телепортировались 1 000 раз
+advancements.tpcontrol.popular_five.title=Популярный V
+advancements.tpcontrol.popular_five.description=К Вам телепортировались 10 000 раз
