@@ -9,7 +9,7 @@
         "description": {
             "translate": "advancements.tpcontrol.popular_four.description"
         },
-        "frame": "goal"
+        "frame": "challenge"
     },
     "parent": "tpcontrol:popular_three",
     "criteria": {
