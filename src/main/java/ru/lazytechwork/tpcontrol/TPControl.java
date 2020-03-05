@@ -5,8 +5,10 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.lazytechwork.tpcontrol.commands.CommandTPC;
 import ru.lazytechwork.tpcontrol.proxy.CommonProxy;
 
 @Mod(modid = TPControl.MODID,
@@ -37,5 +39,10 @@ public class TPControl {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+    }
+
+    @Mod.EventHandler
+    public void serverInit(FMLServerStartingEvent event) {
+        event.registerServerCommand(CommandTPC.COMMAND_TPC);
     }
 }
